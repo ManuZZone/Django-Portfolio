@@ -19,11 +19,15 @@ RUN pip install -r requirements.txt
 # Copia il contenuto del progetto Django nella directory /app del container
 COPY . /app/
 
-RUN python manage.py migrate
-RUN python manage.py collectstatic --noinput
+COPY build.sh /app/
 
-# Porta su cui il server web di Django sarà in ascolto (modificabile)
+RUN chmod +x app/build.sh
 EXPOSE 8000
 
+CMD ["/app/build.sh"]
+
+# Porta su cui il server web di Django sarà in ascolto (modificabile)
+#EXPOSE 8000
+
 # Comando per avviare il server web di Django
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
