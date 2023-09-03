@@ -13,6 +13,9 @@ WORKDIR /app
 # Copia il file requirements.txt nella directory /app del container
 COPY requirements.txt /app/
 
+RUN python -m venv venv
+RUN source venv/bin/activate
+
 # Installa le dipendenze del progetto
 RUN pip install -r requirements.txt
 
