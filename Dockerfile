@@ -13,8 +13,7 @@ WORKDIR /app
 # Copia il file requirements.txt nella directory /app del container
 COPY requirements.txt /app/
 
-RUN python -m venv venv
-RUN source venv/bin/activate
+
 
 # Installa le dipendenze del progetto
 RUN pip install -r requirements.txt
@@ -22,9 +21,8 @@ RUN pip install -r requirements.txt
 # Copia il contenuto del progetto Django nella directory /app del container
 COPY . /app/
 
-# Esegui il comando 'migrate' per applicare le migrazioni del database
-RUN python manage.py migrate
-RUN python manage.py collectstatic --noinput
+RUN python3 manage.py migrate
+RUN python3 manage.py collectstatic --noinput
 
 
 # Porta su cui il server web di Django sarà in ascolto (modificabile)
