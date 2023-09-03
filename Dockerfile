@@ -13,7 +13,9 @@ WORKDIR /app
 # Copia il file requirements.txt nella directory /app del container
 COPY requirements.txt /app/
 
-
+ENV VIRTUAL_ENV=/opt/venv
+RUN python -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Installa le dipendenze del progetto
 RUN pip install -r requirements.txt
@@ -21,9 +23,8 @@ RUN pip install -r requirements.txt
 # Copia il contenuto del progetto Django nella directory /app del container
 COPY . /app/
 
-RUN python3 manage.py migrate
-RUN python3 manage.py collectstatic --noinput
-
+RUN python manage.py migrate
+RUN python manage.py collectstatic --noinput
 
 # Porta su cui il server web di Django sarà in ascolto (modificabile)
 EXPOSE 8000
