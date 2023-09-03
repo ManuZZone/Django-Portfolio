@@ -1,5 +1,5 @@
 # Usa l'immagine Python ufficiale come base
-FROM python:3.8
+FROM python:3.10
 
 # Imposta l'ambiente in modalità non interattiva
 ENV PYTHONUNBUFFERED 1
@@ -12,10 +12,6 @@ WORKDIR /app
 
 # Copia il file requirements.txt nella directory /app del container
 COPY requirements.txt /app/
-
-ENV VIRTUAL_ENV=/opt/venv
-RUN python -m venv $VIRTUAL_ENV
-ENV PATH="$VIRTUAL_ENV/bin:$PATH"
 
 # Installa le dipendenze del progetto
 RUN pip install -r requirements.txt
