@@ -1,0 +1,4 @@
+django
+pillow
+django_compressor
+django-libsass
